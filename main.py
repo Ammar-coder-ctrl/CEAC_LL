@@ -4,7 +4,7 @@ import os
 
 
 #TOKEN
-TOKEN = "8455470674:AAEhM_jFlFpRhgZ4x9806QMrenXzYTBY5WA"
+TOKEN = ""
 
 #CONSTENT
 the_command = 'the_command'
@@ -154,7 +154,7 @@ async def contact_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     contact_text = """
 📞 *معلومات التواصل مع المطوّر:*
 
-- 💬 Telegram: [@amoshka183]
+- 💬 Telegram: []
 
     """
     await context.bot.send_message(chat_id=update.effective_chat.id, text=contact_text, parse_mode="Markdown")
