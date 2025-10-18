@@ -2,10 +2,12 @@ from telegram import Update
 from telegram.ext import CommandHandler, ApplicationBuilder , MessageHandler , filters,ContextTypes
 import os
 from dotenv import load_dotenv
+import threading
 from constant import *
 from admin_edetor import is_admin,load_admins,add_admin,remove_admin
 from bot_kayboard import *
 from users_files_db import *
+from dummy_server import run_flask
 
 load_dotenv()
 create_users_table()
@@ -146,8 +148,6 @@ async def update_user_data(update : Update,context : ContextTypes.DEFAULT_TYPE):
 #smart step
 async def smart_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text
-    user_id = update.effective_user.id
-    user_full_name = update.effective_user.full_name
     user_type = context.user_data.get(the_user_type,"normel")
     #moving
     if text == "MAIN MENU":
@@ -259,7 +259,7 @@ async def smart_step(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 #Main
-if __name__ == "__main__":
+def run_bot():
     app = ApplicationBuilder().token(TOKEN).build()
     #handlers
     start_command_handler = CommandHandler("start", start_command)
@@ -275,3 +275,9 @@ if __name__ == "__main__":
     app.add_handler(smart_step_handler)
     
     app.run_polling()
+
+
+
+if __name__ == "__main__":
+    threading.Thread(target=run_flask).start()
+    run_bot()
