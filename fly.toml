@@ -1,0 +1,11 @@
+app = "ceac-ll" 
+primary_region = "ams"      
+
+[env]
+  PYTHONUNBUFFERED = "true"
+
+[deploy]
+  command = "python main.py"
+
+[experimental]
+  auto_rollback = true
